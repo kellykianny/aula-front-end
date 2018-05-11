@@ -1,0 +1,56 @@
+<!-- TOPO -->
+
+<div class="header-wrapper">
+    <div class="container">
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto mr-auto">
+                <img id="logo" src="assets/logo.png" alt="Logomarca muito louca.">
+            </div>
+            <div class="col-auto">
+
+                <app-carrinho></app-carrinho>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- MENU -->
+<div class="menu-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" [routerLink]="['category']">Categorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" [routerLink]="['product']">Produtos</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTEUDO -->
+<div class="conteudo-wrapper  mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <router-outlet></router-outlet>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- RODAPE -->
+<div class="rodape-wrapper">
+    <div class="container">
+        <p>
+            <i>2018 - Todos direitos reservados</i>
+        </p>
+    </div>
+</div>

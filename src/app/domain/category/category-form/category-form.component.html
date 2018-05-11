@@ -1,0 +1,21 @@
+
+
+<form [formGroup]="formCategory">
+
+
+    <div class="row">
+        <div class="form-group col-lg-12">
+                <label for="Nome">Categoria
+                        <b class="red">*</b>
+                    </label>
+            <input type="text" class="form-control" formControlName="nome"/>
+
+        </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="salvar(formCategory.value)"> Salvar </button>
+
+    <button class="btn btn-secondary" [routerLink]="['/category']" > Voltar</button>
+
+
+</form>

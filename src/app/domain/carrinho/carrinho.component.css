@@ -1,0 +1,17 @@
+.carrinho{
+    width: 150px;
+}
+    .carrinho img{
+        width: 40px;
+        height: auto;
+    }
+    .carrinho h3 {
+        font-size: 0.9em;
+        margin: 0;
+        padding: 0;
+    }
+    .carrinho span{
+        font-size: 0.8em;
+        margin: 0;
+        padding: 0;
+    }

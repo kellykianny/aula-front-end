@@ -1,0 +1,45 @@
+<form [formGroup]="productForm" novalidate>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="Nome">Produto
+                <b class="red">*</b>
+            </label>
+            <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="80" placeholder="Nome">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="Nome">Marca
+                <b class="red">*</b>
+            </label>
+            <input type="text" class="form-control text-muted" name="marca" formControlName="marca" maxlength="50" placeholder="Marca">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="Nome">Descrição
+                <b class="red">*</b>
+            </label>
+            <input type="text" class="form-control text-muted" name="descricao" formControlName="descricao" maxlength="200">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="Nome">Preco
+                <b class="red">*</b>
+            </label>
+            <input type="number" class="form-control text-muted" name="preco" formControlName="preco" maxlength="10">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputCategory">Categoria</label>
+        <select id="inputCategory" class="form-control" formControlName="category" [compareWith]="compareFn">
+            <option selected>Selecione</option>
+            <option *ngFor="let category of categories" [ngValue]="category">
+                {{category.nome}}
+            </option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="save(productForm.value)">
+        Salvar
+    </button>
+    <button class="btn btn-secondary" [routerLink]="['/product/list']">
+        Cancelar
+    </button>
+</form>
