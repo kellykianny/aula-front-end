@@ -8,20 +8,27 @@ import {AppRoutingModule} from './app.routes';
 
 import {CarrinhoComponent} from './domain/carrinho/carrinho.component';
 import {CarrinhoService} from './domain/carrinho/carrinho.service';
+import { HomeComponent } from './domain/home/home.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductService } from './domain/product/product.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CarrinhoComponent
+    CarrinhoComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule,
     HttpModule,
-    RouterModule,
+    HttpClientModule,
+    CommonModule,
+    BrowserModule,
     AppRoutingModule
   ],
   providers: [
-    CarrinhoService
+    CarrinhoService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
