@@ -26,6 +26,19 @@ export class HomeComponent implements OnInit {
     this.findAll();
   }
 
+  enviandoAoCarrinho(produto) {
+    //Cria um array de produtos, buscando do localStorage (se for null ou undefined, cria um array vazio)
+    let produtos = localStorage.getItem("produtos") ?
+      JSON.parse(localStorage.getItem("produtos")) :
+      [];
+    
+    //Adiciona o produto ao array
+    produtos.push(produto);
+
+    //Envia o array para o localStorage
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+  }
+
   findAll() {
     this.productService.findAll()
       .subscribe(products => {

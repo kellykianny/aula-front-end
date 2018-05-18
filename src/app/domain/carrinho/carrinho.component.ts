@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
-import {CarrinhoService} from './carrinho.service';
-import {Carrinho} from './carrinho';
-import {Product} from '../product/product';
+import { CarrinhoService } from './carrinho.service';
+import { Carrinho } from './carrinho';
+import { Product } from '../product/product';
 
 @Component({
   selector: 'app-carrinho',
@@ -13,32 +13,32 @@ import {Product} from '../product/product';
 })
 export class CarrinhoComponent implements OnInit {
 
-  private subscription : Subscription;
-  products : Product[];
-  ativado : boolean = true
+  private subscription: Subscription;
+  products: Product[];
+  ativado: boolean = true
 
   constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
 
-    this.carrinhoService.carrinho.subscribe( (carrinho: Carrinho) => {
-      this.products = carrinho.products;
-    } );
   }
 
-  ngOnDestroy() {
-    this
-        .subscription
-        .unsubscribe();
-  }
-
-  adicionarProduct(product: Product){
+  adicionarProduct(product: Product) {
     this.carrinhoService.adicionarProduct(product);
   }
 
-  removerProduct(id: number){
+  removerProduct(id: number) {
     this.carrinhoService.removerProduct(id);
   }
 
+  lista() {
+    return localStorage.getItem("produtos") ?
+      JSON.parse(localStorage.getItem("produtos")) :
+      [];
+  }
 
+  limpaStorage() {
+    localStorage.clear();
+    this.lista()
+  }
 }
