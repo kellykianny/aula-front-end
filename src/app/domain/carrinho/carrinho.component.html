@@ -1,5 +1,4 @@
-<button type="submit" class="btn btn-primary" (click)="limpaStorage()">
-  Limpar
+<button type="button" class="btn btn-primary btn-sm" [routerLink]="['/home']">Continuar comprando
 </button>
 <div class="mt-3">
     <table class="table">
@@ -7,12 +6,17 @@
         <tr>
           <th scope="col">Produto</th>
           <th scope="col">Preço</th>
+          <th scope="col">Excluir</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let carrinho of lista()">
           <th scope="row">{{carrinho.nome}}</th>
           <td>{{carrinho.preco}}</td>
+          <td><button type="submit" class="btn btn-danger" (click)="limpaStorage()">
+              <i class="material-icons center-button">delete_forever</i>
+          </button></td>
+          
         </tr>
       </tbody>
     </table>

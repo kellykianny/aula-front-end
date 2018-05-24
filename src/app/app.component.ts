@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {CarrinhoComponent} from './domain/carrinho/carrinho.component';
 
@@ -7,6 +7,14 @@ import {CarrinhoComponent} from './domain/carrinho/carrinho.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app';
+export class AppComponent implements OnInit{
+  tamanho:number = 0;
+  constructor() { }
+
+  ngOnInit() {
+
+    let produtoStorage = JSON.parse(localStorage.getItem("produtos")).length;
+    this.tamanho = produtoStorage;
+
+  }
 }
