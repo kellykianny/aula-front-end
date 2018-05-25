@@ -11,12 +11,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let carrinho of lista()">
-          <th scope="row">{{carrinho.nome}}</th>
-          <td>{{carrinho.preco}}</td>
-          <td><button type="submit" class="btn btn-danger" (click)="limpaStorage()">
+          <th scope="row">{{carrinho.produto.nome}}</th>
+          <td>{{carrinho.produto.preco}}</td>
+          <td><button type="submit" class="btn btn-danger" (click)="delete(carrinho.index)">
               <i class="material-icons center-button">delete_forever</i>
           </button></td>
-          
         </tr>
       </tbody>
     </table>

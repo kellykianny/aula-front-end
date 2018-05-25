@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Product } from '../product/product';
 import { ProductService } from '../product/product.service';
+import { AppComponent } from '../../app.component';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public productService: ProductService
+    public productService: ProductService,
+    public appComponent: AppComponent
   ) { }
 
   ngOnInit() {
@@ -27,16 +29,18 @@ export class HomeComponent implements OnInit {
   }
 
   enviandoAoCarrinho(produto) {
-    //Cria um array de produtos, buscando do localStorage (se for null ou undefined, cria um array vazio)
     let produtos = localStorage.getItem("produtos") ?
       JSON.parse(localStorage.getItem("produtos")) :
       [];
-    
-    //Adiciona o produto ao array
-    produtos.push(produto);
 
-    //Envia o array para o localStorage
+    let item = {
+      produto: produto,
+      index: produtos.length + 1
+    }
+    
+    produtos.push(item);
     localStorage.setItem("produtos", JSON.stringify(produtos));
+    this.appComponent.atualizaNumero();
   }
 
   findAll() {

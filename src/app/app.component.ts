@@ -12,9 +12,11 @@ export class AppComponent implements OnInit{
   constructor() { }
 
   ngOnInit() {
+    this.atualizaNumero();
+  }
 
+  atualizaNumero(){
     let produtoStorage = JSON.parse(localStorage.getItem("produtos")).length;
     this.tamanho = produtoStorage;
-
   }
 }

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { CarrinhoService } from './carrinho.service';
 import { Carrinho } from './carrinho';
 import { Product } from '../product/product';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-carrinho',
@@ -17,7 +18,8 @@ export class CarrinhoComponent implements OnInit {
   products: Product[];
   ativado: boolean = true
 
-  constructor(private carrinhoService: CarrinhoService) { }
+  constructor(private carrinhoService: CarrinhoService, 
+    public appComponent: AppComponent) { }
 
   ngOnInit() {
 
@@ -37,8 +39,15 @@ export class CarrinhoComponent implements OnInit {
       [];
   }
 
-  limpaStorage() {
-    localStorage.clear();
-    this.lista()
+  delete(i){
+    let produtos = localStorage.getItem("produtos") ?
+      JSON.parse(localStorage.getItem("produtos")) :
+      [];
+      
+    produtos = produtos.filter(p => p.index !== i);
+
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+    this.lista();
+    this.appComponent.atualizaNumero();
   }
 }
