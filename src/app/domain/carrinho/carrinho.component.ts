@@ -18,11 +18,11 @@ export class CarrinhoComponent implements OnInit {
   products: Product[];
   ativado: boolean = true
 
-  constructor(private carrinhoService: CarrinhoService, 
+  constructor(private carrinhoService: CarrinhoService,
     public appComponent: AppComponent) { }
 
   ngOnInit() {
-
+    this.lista();
   }
 
   adicionarProduct(product: Product) {
@@ -39,11 +39,11 @@ export class CarrinhoComponent implements OnInit {
       [];
   }
 
-  delete(i){
+  delete(i) {
     let produtos = localStorage.getItem("produtos") ?
       JSON.parse(localStorage.getItem("produtos")) :
       [];
-      
+
     produtos = produtos.filter(p => p.index !== i);
 
     localStorage.setItem("produtos", JSON.stringify(produtos));

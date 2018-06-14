@@ -16,7 +16,16 @@ export class AppComponent implements OnInit{
   }
 
   atualizaNumero(){
-    let produtoStorage = JSON.parse(localStorage.getItem("produtos")).length;
-    this.tamanho = produtoStorage;
+    let produtos = localStorage.getItem("produtos") ?
+      JSON.parse(localStorage.getItem("produtos")) :
+      [];
+
+    let quantidadeDeProdutos = 0;
+
+    for (let i = 0; i < produtos.length; i++) {
+      quantidadeDeProdutos = quantidadeDeProdutos + produtos[i].quantidade; 
+    }
+
+    this.tamanho = quantidadeDeProdutos;
   }
 }

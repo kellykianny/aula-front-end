@@ -35,10 +35,25 @@ export class HomeComponent implements OnInit {
 
     let item = {
       produto: produto,
-      index: produtos.length + 1
+      index: produtos.length + 1,
+      quantidade: 1
     }
-    
-    produtos.push(item);
+
+    var teste = true;
+
+    for (let i = 0; i < produtos.length; i++) {
+      if (produtos[i].produto.id == item.produto.id) {
+        produtos[i].produto.preco = produtos[i].produto.preco + item.produto.preco;
+        produtos[i].quantidade = produtos[i].quantidade + 1;
+        localStorage.setItem("produtos", JSON.stringify(produtos));
+        teste = false;
+      }
+    }
+
+    if (teste) {
+      produtos.push(item);
+    }
+
     localStorage.setItem("produtos", JSON.stringify(produtos));
     this.appComponent.atualizaNumero();
   }
