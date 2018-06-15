@@ -16,13 +16,15 @@ export class CarrinhoComponent implements OnInit {
 
   private subscription: Subscription;
   products: Product[];
-  ativado: boolean = true
+  ativado: boolean = true;
+  precoTotal: Number = 0;
 
   constructor(private carrinhoService: CarrinhoService,
     public appComponent: AppComponent) { }
 
   ngOnInit() {
     this.lista();
+    this.valorTotal();
   }
 
   adicionarProduct(product: Product) {
@@ -49,5 +51,46 @@ export class CarrinhoComponent implements OnInit {
     localStorage.setItem("produtos", JSON.stringify(produtos));
     this.lista();
     this.appComponent.atualizaNumero();
+    this.valorTotal();
+  }
+
+  atualizarItem(produto, valor) {
+    let produtos = localStorage.getItem("produtos") ?
+      JSON.parse(localStorage.getItem("produtos")) :
+      [];
+
+    for (let i = 0; i < produtos.length; i++) {
+      if (produtos[i].produto.id == produto.id) {
+        if (produtos[i].quantidade > 1 || valor == 1) {
+          if (valor == 0) {
+            produtos[i].produto.preco = produtos[i].produto.preco - (produtos[i].produto.preco / produtos[i].quantidade);
+            produtos[i].quantidade = produtos[i].quantidade - 1;
+          }
+          else {
+            produtos[i].produto.preco = produtos[i].produto.preco + (produtos[i].produto.preco / produtos[i].quantidade);
+            produtos[i].quantidade = produtos[i].quantidade + 1;
+          }
+          localStorage.setItem("produtos", JSON.stringify(produtos));
+        } else {
+          break;
+        }
+      }
+    }
+    this.appComponent.atualizaNumero();
+    this.valorTotal();
+  }
+
+  valorTotal(){
+    let produtos = localStorage.getItem("produtos") ?
+    JSON.parse(localStorage.getItem("produtos")) :
+    [];
+
+    let  valorAux = 0;
+
+    for (let i = 0; i < produtos.length; i++) {
+     valorAux = valorAux + produtos[i].produto.preco;
+    }
+
+    this.precoTotal = valorAux;
   }
 }

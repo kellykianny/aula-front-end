@@ -16,6 +16,12 @@
         <td>{{carrinho.produto.preco}}</td>
         <td>{{carrinho.quantidade}}</td>
         <td>
+          <button type="submit" class="btn btn-success" (click)="atualizarItem(carrinho.produto,1)">
+            <i class="material-icons center-button">add</i>
+          </button>
+          <button type="submit" class="btn btn-danger" (click)="atualizarItem(carrinho.produto,0)">
+            <i class="material-icons center-button">remove</i>
+          </button>
           <button type="submit" class="btn btn-danger" (click)="delete(carrinho.index)">
             <i class="material-icons center-button">delete_forever</i>
           </button>
@@ -24,3 +30,5 @@
     </tbody>
   </table>
 </div>
+
+<h6 class="text-right">Preço Total: R$ {{precoTotal}}</h6>
