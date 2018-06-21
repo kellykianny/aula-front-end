@@ -1,34 +1,62 @@
 <div class="row">
-  <div class="col-md-6 text-left">
+  <div class="col-md-3 text-left">
     <button type="button" class="btn btn-primary" [routerLink]="['/home']">Continuar comprando
     </button>
   </div>
-  <div class="col-md-6 text-right">
-    <button type="button" class="btn btn-success" [routerLink]="['/home']">Finalizar Compra
-    </button>
-  </div>
 </div>
+
 <div class="mt-3">
   <table class="table">
     <thead>
       <tr>
         <th scope="col">Produto</th>
-        <th scope="col">Preço</th>
+        <th scope="col">Preço Unitário</th>
+        <th scope="col">Preço Total</th>
         <th scope="col">Quantidade</th>
-        <th scope="col">Excluir</th>
+        <th scope="col">Deletar Produto</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let carrinho of lista()">
         <th>{{carrinho.produto.nome}}</th>
+        <td>{{carrinho.valorUnitario}}</td>
         <td>{{carrinho.produto.preco}}</td>
-        <td>{{carrinho.quantidade}}</td>
         <td>
-          <button type="submit" class="btn btn-danger" (click)="delete(carrinho.index)">
+          <button type="button" class="mr-2 btn btn-success btn-sm" (click)="atualizandoItem(carrinho.produto, 1)">
+            <i class="material-icons center-button">keyboard_arrow_left</i>
+          </button>
+          {{carrinho.quantidade}}
+          <button type="button" class="ml-2 btn btn-danger btn-sm" (click)="atualizandoItem(carrinho.produto, 0)">
+            <i class="material-icons center-button">keyboard_arrow_right</i>
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm" (click)="delete(carrinho.index)">
             <i class="material-icons center-button">delete_forever</i>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <form [formGroup]="cupomForm" class="form-inline mb-3 mt-3">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input type="text" formControlName="name" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Código de Desconto">
+
+      <button type="button" class="btn btn-primary" (click)="codDesconto(cupomForm.value)">
+          <i class="material-icons left">add</i>Aplicar
+      </button>
+      <button type="button" class="ml-2 btn btn-danger" (click)="limparCodigo()">
+          <i class="material-icons center-button left">delete_forever</i>
+        Limpar Codigo</button>
+    </form>
+  </div>
+  <div class="col-md-6 text-right">
+    <h5 class="smt-2">Preço Total: R$ {{valorTotal}}</h5>
+    <button type="button" class="btn btn-success" [routerLink]="['/home']">
+      Finalizar Compra
+    </button>
+  </div>
 </div>

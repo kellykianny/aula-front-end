@@ -1,34 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
-import {Http} from '@angular/http';
-
-import {Observable} from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
-import {Carrinho} from './carrinho'
-import {Product} from '../product/product'
+import { Cupom } from './cupom';
+
 
 @Injectable()
 export class CarrinhoService {
 
-    private carrinhoSubject = new Subject<Carrinho>();
-    products: Product[] = [];
-    carrinho = this.carrinhoSubject.asObservable();
-    
-    
-    constructor(public http : Http){}
+    constructor(private http: Http) { }
 
-    adicionarProduct(product: Product){
-        this.products.push(product);
-        this.carrinhoSubject.next(<Carrinho>{ativo: true , products:  this.products});
+    findCouponByName(nomeCupom: string): Observable<Cupom> {
+        return this.http
+        .get(`http://localhost:8181/api/coupon/${nomeCupom}`)
+        .map(response => response.json().content )
     }
-
-    removerProduct(id: number){
-       this.products =  this.products.filter(  product => product.id !== id);
-       this.carrinhoSubject.next(<Carrinho>{ativo: true , products:  this.products});
-    }
-
-
 }
+

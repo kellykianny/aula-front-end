@@ -33,34 +33,31 @@ export class HomeComponent implements OnInit {
       JSON.parse(localStorage.getItem("produtos")) :
       [];
 
-    // criando um array de itens.
     let item = {
       produto: produto,
       index: produtos.length + 1,
-      quantidade: 1
+      quantidade: 1,
+      valorUnitario: 0
     }
 
-    // Criando uma variável para o item que não existe no carrinho.
-    var itemNaoExistenteNaListaDeProdutos = true;
+    var teste = true;
 
     for (let i = 0; i < produtos.length; i++) {
       if (produtos[i].produto.id == item.produto.id) {
         produtos[i].produto.preco = produtos[i].produto.preco + item.produto.preco;
         produtos[i].quantidade = produtos[i].quantidade + 1;
         localStorage.setItem("produtos", JSON.stringify(produtos));
-
-        // Item existente no carrinho, então ele recebe falso.
-        itemNaoExistenteNaListaDeProdutos = false;
+        teste = false;
       }
     }
 
-    // Caso o item não exista no carrinho, o item será inserido.
-    if (itemNaoExistenteNaListaDeProdutos) {
+    item.valorUnitario = produto.preco;
+
+    if (teste) {
       produtos.push(item);
-      localStorage.setItem("produtos", JSON.stringify(produtos));
     }
-    
-    // Chamando função que atualiza o número no menu superior
+
+    localStorage.setItem("produtos", JSON.stringify(produtos));
     this.appComponent.atualizaNumero();
   }
 
