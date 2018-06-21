@@ -17,7 +17,6 @@ export class CarrinhoComponent implements OnInit {
   valorTotal: Number = 0;
   cupomForm: FormGroup;
 
-<<<<<<< HEAD
   constructor(
     public appComponent: AppComponent,
     private carrinhoService: CarrinhoService,
@@ -30,20 +29,6 @@ export class CarrinhoComponent implements OnInit {
       id: [],
       name: ['', [Validators.maxLength(10)]],
     }, {})
-=======
-  private subscription: Subscription;
-  products: Product[];
-  ativado: boolean = true;
-  precoTotal: Number = 0;
-
-  constructor(private carrinhoService: CarrinhoService,
-    public appComponent: AppComponent) { }
-
-  ngOnInit() {
-    this.lista();
-    this.valorTotal();
-  }
->>>>>>> c41b6de1be4a4eadc6ea0d18896b6ec5b88f44d7
 
     this.lista();
     this.precoTotal();
@@ -65,17 +50,10 @@ export class CarrinhoComponent implements OnInit {
     localStorage.setItem("produtos", JSON.stringify(produtos));
     this.lista();
     this.appComponent.atualizaNumero();
-<<<<<<< HEAD
     this.precoTotal();
   }
 
   atualizandoItem(produto, valor) {
-=======
-    this.valorTotal();
-  }
-
-  atualizarItem(produto, valor) {
->>>>>>> c41b6de1be4a4eadc6ea0d18896b6ec5b88f44d7
     let produtos = localStorage.getItem("produtos") ?
       JSON.parse(localStorage.getItem("produtos")) :
       [];
@@ -86,12 +64,7 @@ export class CarrinhoComponent implements OnInit {
           if (valor == 0) {
             produtos[i].produto.preco = produtos[i].produto.preco - (produtos[i].produto.preco / produtos[i].quantidade);
             produtos[i].quantidade = produtos[i].quantidade - 1;
-<<<<<<< HEAD
           } else {
-=======
-          }
-          else {
->>>>>>> c41b6de1be4a4eadc6ea0d18896b6ec5b88f44d7
             produtos[i].produto.preco = produtos[i].produto.preco + (produtos[i].produto.preco / produtos[i].quantidade);
             produtos[i].quantidade = produtos[i].quantidade + 1;
           }
@@ -102,7 +75,6 @@ export class CarrinhoComponent implements OnInit {
       }
     }
     this.appComponent.atualizaNumero();
-<<<<<<< HEAD
     this.precoTotal();
   }
 
@@ -144,22 +116,5 @@ export class CarrinhoComponent implements OnInit {
     localStorage.removeItem('desconto');
     this.toastrService.Success('Cupom removido com sucesso!');
     this.precoTotal();
-=======
-    this.valorTotal();
-  }
-
-  valorTotal(){
-    let produtos = localStorage.getItem("produtos") ?
-    JSON.parse(localStorage.getItem("produtos")) :
-    [];
-
-    let  valorAux = 0;
-
-    for (let i = 0; i < produtos.length; i++) {
-     valorAux = valorAux + produtos[i].produto.preco;
-    }
-
-    this.precoTotal = valorAux;
->>>>>>> c41b6de1be4a4eadc6ea0d18896b6ec5b88f44d7
   }
 }
