@@ -16,7 +16,7 @@ export class CarrinhoService {
 
     findCouponByName(nomeCupom: string): Observable<Cupom> {
         return this.http
-        .get(`http://localhost:8181/api/coupon/${nomeCupom}`)
+        .get(`http://localhost:8181/api/cupom/${nomeCupom}`)
         .map(response => response.json().content )
     }
 }
